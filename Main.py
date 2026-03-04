@@ -8,7 +8,7 @@ path = '/Users/hannes/Documents/University/KnowledgeGraphs/Data/dance data.csv'
 # Load YouTube API key
 def load_youtube_api_key():
     """Load the YouTube API key from yt_key.txt file"""
-    with open('yt_key.txt', 'r') as f:
+    with open('yt_code/yt_key.txt', 'r') as f:
         line = f.read().strip()
         if line.startswith('key='):
             return line.split('=', 1)[1]

@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "required": [
+    "dance_type","dance_style","origin","time_period","cultural_significance",
+    "notable_characteristics","instruments","hardness_ratio","dance_formation",
+    "costume","tempo_bpm","famous_practitioners","events_and_festivals",
+    "modern_adaptations","associated_music_genre","learning_difficulty",
+    "health_benefits","age_group"
+  ],
+  "properties": {
+    "dance_type": {"type":"string","minLength":1},
+    "dance_style": {"type":"string","minLength":1},
+    "origin": {"type":"string","minLength":1},
+    "time_period": {"type":"string","minLength":1},
+    "cultural_significance": {"type":"string","minLength":10},
+    "notable_characteristics": {"type":"string","minLength":10},
+    "instruments": {
+      "type":"array",
+      "items":{"type":"string"},
+      "minItems":1,
+      "maxItems":10
+    },
+    "hardness_ratio": {"type":"number","minimum":0.0,"maximum":1.0},
+    "dance_formation": {
+      "type":"string",
+      "enum":["Solo","Partner","Group","Circle","Line","Square","Freestyle","Processional","Mixed"]
+    },
+    "costume": {"type":"string","minLength":5},
+    "tempo_bpm": {
+      "type":"object",
+      "required":["min","max"],
+      "properties":{
+        "min":{"type":"integer","minimum":40,"maximum":220},
+        "max":{"type":"integer","minimum":40,"maximum":220}
+      }
+    },
+    "famous_practitioners": {
+      "type":"array","items":{"type":"string"},
+      "minItems":1,"maxItems":5
+    },
+    "events_and_festivals": {
+      "type":"array","items":{"type":"string"},
+      "minItems":1,"maxItems":5
+    },
+    "modern_adaptations": {"type":"string","minLength":10},
+    "associated_music_genre": {
+      "type":"array",
+      "items":{"type":"string"},
+      "minItems":1,
+      "maxItems":5
+    },
+    "learning_difficulty": {"type":"string","enum":["Beginner","Intermediate","Advanced"]},
+    "health_benefits": {
+      "type":"array","items":{"type":"string"},
+      "minItems":1,"maxItems":5
+    },
+    "age_group": {"type":"string","enum":["Kids","Teens","Adults","Seniors","All ages"]}
+  },
+  "additionalProperties": false
+}
