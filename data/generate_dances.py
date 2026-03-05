@@ -22,7 +22,7 @@ client = OpenAI(
 pairs = pd.read_csv("allowed_pairs.csv")
 
 # LIMIT TO FIRST 50 PAIRS FOR TESTING
-pairs = pairs.head(50)
+#pairs = pairs.head(50)
 print(f"Processing first {len(pairs)} dance pairs")
 
 # Load JSON schema
@@ -51,9 +51,9 @@ Output {len(batch_pairs)} complete JSON objects.
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
-                model="openai/gpt-4o-mini",
+                model="openai/gpt-4.1-mini",
                 messages=[{"role": "user", "content": prompt}],
-                temperature=0.7,
+                temperature=0.2,
             )
 
             content = response.choices[0].message.content
