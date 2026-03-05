@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 import tkinter as tk
 from tkinter import ttk, messagebox
+import webbrowser
 
 # Make sure the wrapper is importable when running this file directly
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -99,7 +100,7 @@ def load_filter_options(kg: SimpleDanceKG) -> dict[str, list[str]]:
 def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[dict]:
     """Build a SPARQL query from the active (non-'(any)') selections."""
     where_blocks = ""
-    select_vars = "?styleName"
+    select_vars = "?styleName ?videoTitle ?videoUrl"
 
     for f in FILTERS:
         var      = f["var"]
@@ -107,7 +108,6 @@ def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[d
         value    = selected.get(var, "(any)")
 
         if value and value != "(any)":
-            # Must match — use a plain triple + FILTER
             safe_val = value.replace("'", "\\'")
             where_blocks += (
                 f"  ?record {f['prop']} ?{var} .\n"
@@ -115,7 +115,6 @@ def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[d
                 f"  FILTER(LCASE(STR(?{varName})) = LCASE('{safe_val}'))\n"
             )
         else:
-            # Optional — fetch the value for display but don't restrict
             where_blocks += (
                 f"  OPTIONAL {{\n"
                 f"    ?record {f['prop']} ?{var} .\n"
@@ -125,13 +124,18 @@ def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[d
         select_vars += f" ?{varName}"
 
     query = f"""
-    PREFIX dance: <http://example.org/dance/>
+    PREFIX dance:   <http://example.org/dance/>
     PREFIX schema1: <http://schema.org/>
 
     SELECT DISTINCT {select_vars} WHERE {{
       ?record a dance:DanceRecord ;
               dance:hasDanceStyle ?style .
       ?style schema1:name ?styleName .
+      OPTIONAL {{
+        ?style dance:hasYTLink ?video .
+        ?video schema1:title ?videoTitle .
+        BIND(REPLACE(STR(?video), "http://example.org/dance/video_", "https://www.youtube.com/watch?v=") AS ?videoUrl)
+      }}
 {where_blocks}    }}
     ORDER BY ?styleName
     LIMIT {int(limit)}
@@ -205,22 +209,42 @@ class DanceKGApp(tk.Tk):
         frame.columnconfigure(0, weight=1)
         frame.rowconfigure(0, weight=1)
 
-        # Columns: style name + one per filter
-        all_cols = ["styleName"] + [f["var"] + "Name" for f in FILTERS]
-        display  = ["Dance Style"] + [f["label"] for f in FILTERS]
+        # Dance Style + video columns + one per filter
+        self._all_cols = (
+            ["styleName", "videoTitle", "videoUrl"]
+            + [f["var"] + "Name" for f in FILTERS]
+        )
+        display = (
+            ["Dance Style", "Video Title", "Video URL"]
+            + [f["label"] for f in FILTERS]
+        )
 
-        self.tree = ttk.Treeview(frame, columns=all_cols, show="headings", height=20)
-        for col, disp in zip(all_cols, display):
+        self.tree = ttk.Treeview(frame, columns=self._all_cols, show="headings", height=20)
+        for col, disp in zip(self._all_cols, display):
             self.tree.heading(col, text=disp)
-            self.tree.column(col, width=140, anchor="w", stretch=True)
+            w = 260 if col == "videoTitle" else (300 if col == "videoUrl" else 140)
+            self.tree.column(col, width=w, anchor="w", stretch=True)
 
-        vsb = ttk.Scrollbar(frame, orient="vertical", command=self.tree.yview)
+        vsb = ttk.Scrollbar(frame, orient="vertical",   command=self.tree.yview)
         hsb = ttk.Scrollbar(frame, orient="horizontal", command=self.tree.xview)
         self.tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
 
         self.tree.grid(row=0, column=0, sticky="nsew")
         vsb.grid(row=0, column=1, sticky="ns")
         hsb.grid(row=1, column=0, sticky="ew")
+
+        # Double-click a row → open the YouTube URL in the browser
+        self.tree.bind("<Double-1>", self._open_url)
+
+    def _open_url(self, event):
+        item = self.tree.focus()
+        if not item:
+            return
+        values = self.tree.item(item, "values")
+        url_idx = self._all_cols.index("videoUrl")
+        url = values[url_idx] if len(values) > url_idx else ""
+        if url and url.startswith("http"):
+            webbrowser.open(url)
 
     # ── Actions ───────────────────────────────────────────────────────────────
     def _search(self):
@@ -240,9 +264,8 @@ class DanceKGApp(tk.Tk):
         for item in self.tree.get_children():
             self.tree.delete(item)
 
-        all_cols = ["styleName"] + [f["var"] + "Name" for f in FILTERS]
         for row in rows:
-            values = [row.get(col) or "" for col in all_cols]
+            values = [row.get(col) or "" for col in self._all_cols]
             self.tree.insert("", "end", values=values)
 
         active = sum(1 for v in selected.values() if v != "(any)")
