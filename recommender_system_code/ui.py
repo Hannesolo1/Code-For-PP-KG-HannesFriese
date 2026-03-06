@@ -103,6 +103,19 @@ def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[d
     select_vars = "?styleName ?videoTitle ?videoUrl"
 
     for f in FILTERS:
+        if f["var"] in ("healthBenefit", "musicGenre"):
+            # Multi-valued – handled separately to avoid row multiplication.
+            # If a filter value is selected we still add a filter constraint.
+            value = selected.get(f["var"], "(any)")
+            if value and value != "(any)":
+                safe_val = value.replace("'", "\\'")
+                where_blocks += (
+                    f"  ?record {f['prop']} ?{f['var']} .\n"
+                    f"  ?{f['var']} {f['name_prop']} ?{f['var']}Name .\n"
+                    f"  FILTER(LCASE(STR(?{f['var']}Name)) = LCASE('{safe_val}'))\n"
+                )
+            continue
+
         var      = f["var"]
         varName  = f"{var}Name"
         value    = selected.get(var, "(any)")
@@ -140,7 +153,65 @@ def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[d
     ORDER BY ?styleName
     LIMIT {int(limit)}
     """
-    return kg.select(query)
+    rows = kg.select(query)
+
+    # ── Fetch all health benefits per dance style and aggregate into a list ──
+    hb_query = """
+    PREFIX dance:   <http://example.org/dance/>
+    PREFIX schema1: <http://schema.org/>
+
+    SELECT ?styleName ?healthBenefitName WHERE {
+      ?record a dance:DanceRecord ;
+              dance:hasDanceStyle ?style ;
+              dance:hasHealthBenefit ?hb .
+      ?style schema1:name ?styleName .
+      ?hb schema1:name ?healthBenefitName .
+    }
+    """
+    hb_rows = kg.select(hb_query)
+    hb_map: dict[str, list[str]] = {}
+    for r in hb_rows:
+        sn  = r.get("styleName", "")
+        hbn = r.get("healthBenefitName", "")
+        if sn and hbn:
+            hb_map.setdefault(sn, [])
+            if hbn not in hb_map[sn]:
+                hb_map[sn].append(hbn)
+
+    for row in rows:
+        sn = row.get("styleName", "")
+        benefits = sorted(hb_map.get(sn, []))
+        row["healthBenefitName"] = ", ".join(benefits) if benefits else ""
+
+    # ── Fetch all music genres per dance style and aggregate into a list ──
+    mg_query = """
+    PREFIX dance:   <http://example.org/dance/>
+    PREFIX schema1: <http://schema.org/>
+
+    SELECT ?styleName ?musicGenreName WHERE {
+      ?record a dance:DanceRecord ;
+              dance:hasDanceStyle ?style ;
+              dance:hasAssociatedMusicGenre ?mg .
+      ?style schema1:name ?styleName .
+      ?mg schema1:name ?musicGenreName .
+    }
+    """
+    mg_rows = kg.select(mg_query)
+    mg_map: dict[str, list[str]] = {}
+    for r in mg_rows:
+        sn  = r.get("styleName", "")
+        mgn = r.get("musicGenreName", "")
+        if sn and mgn:
+            mg_map.setdefault(sn, [])
+            if mgn not in mg_map[sn]:
+                mg_map[sn].append(mgn)
+
+    for row in rows:
+        sn = row.get("styleName", "")
+        genres = sorted(mg_map.get(sn, []))
+        row["musicGenreName"] = ", ".join(genres) if genres else ""
+
+    return rows
 
 
 # ── Main UI class ─────────────────────────────────────────────────────────────
@@ -222,7 +293,14 @@ class DanceKGApp(tk.Tk):
         self.tree = ttk.Treeview(frame, columns=self._all_cols, show="headings", height=20)
         for col, disp in zip(self._all_cols, display):
             self.tree.heading(col, text=disp)
-            w = 260 if col == "videoTitle" else (300 if col == "videoUrl" else 140)
+            if col == "videoTitle":
+                w = 260
+            elif col == "videoUrl":
+                w = 300
+            elif col in ("healthBenefitName", "musicGenreName"):
+                w = 320  # wider – holds a comma-separated list
+            else:
+                w = 140
             self.tree.column(col, width=w, anchor="w", stretch=True)
 
         vsb = ttk.Scrollbar(frame, orient="vertical",   command=self.tree.yview)
