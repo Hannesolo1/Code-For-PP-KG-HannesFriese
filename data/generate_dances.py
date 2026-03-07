@@ -4,7 +4,6 @@ from jsonschema import validate, ValidationError
 from openai import OpenAI
 import time
 
-# --- Load API key from file ---
 with open("GPT4oKEY.txt", "r") as f:
     api_key = f.read().strip()
 
@@ -19,14 +18,11 @@ client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
 )
 # Load allowed pairs
-pairs = pd.read_csv("allowed_pairs.csv")
-
-# LIMIT TO FIRST 50 PAIRS FOR TESTING
-#pairs = pairs.head(50)
+pairs = pd.read_csv("ai_data/allowed_pairs.csv")
 print(f"Processing first {len(pairs)} dance pairs")
 
 # Load JSON schema
-with open("schema.json") as f:
+with open("ai_data/schema.json") as f:
     schema = json.load(f)
 
 def generate_batch(batch_pairs, max_retries=5):
@@ -120,12 +116,12 @@ for i in range(0, len(pairs), BATCH_SIZE):
         time.sleep(3)
 
 # Save
-with open("dance_dataset.jsonl", "w") as f:
+with open("ai_data/dance_dataset_testing.jsonl", "w") as f:
     for row in all_valid:
         f.write(json.dumps(row) + "\n")
 
 # Save
-with open("dance_dataset_invalid.jsonl", "w") as f:
+with open("ai_data/dance_dataset_invalid_testing.jsonl", "w") as f:
     for row in all_invalid:
         f.write(json.dumps(row) + "\n")
 print("Done.")

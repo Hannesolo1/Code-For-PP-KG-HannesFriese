@@ -58,10 +58,10 @@ FILTERS = [
         "var":      "musicGenre",
     },
     {
-        "label":    "Health Benefit",
-        "prop":     "dance:hasHealthBenefit",
+        "label":    "Instrument",
+        "prop":     "dance:hasInstrument",
         "name_prop": "schema1:name",
-        "var":      "healthBenefit",
+        "var":      "instrument",
     },
     {
         "label":    "Time Period",
@@ -103,7 +103,7 @@ def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[d
     select_vars = "?styleName ?videoTitle ?videoUrl"
 
     for f in FILTERS:
-        if f["var"] in ("healthBenefit", "musicGenre"):
+        if f["var"] in ("instrument", "musicGenre", "timePeriod"):
             # Multi-valued – handled separately to avoid row multiplication.
             # If a filter value is selected we still add a filter constraint.
             value = selected.get(f["var"], "(any)")
@@ -155,33 +155,33 @@ def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[d
     """
     rows = kg.select(query)
 
-    # ── Fetch all health benefits per dance style and aggregate into a list ──
-    hb_query = """
+    # ── Fetch all instruments per dance style and aggregate into a list ──
+    ins_query = """
     PREFIX dance:   <http://example.org/dance/>
     PREFIX schema1: <http://schema.org/>
 
-    SELECT ?styleName ?healthBenefitName WHERE {
+    SELECT ?styleName ?instrumentName WHERE {
       ?record a dance:DanceRecord ;
               dance:hasDanceStyle ?style ;
-              dance:hasHealthBenefit ?hb .
+              dance:hasInstrument ?ins .
       ?style schema1:name ?styleName .
-      ?hb schema1:name ?healthBenefitName .
+      ?ins schema1:name ?instrumentName .
     }
     """
-    hb_rows = kg.select(hb_query)
-    hb_map: dict[str, list[str]] = {}
-    for r in hb_rows:
+    ins_rows = kg.select(ins_query)
+    ins_map: dict[str, list[str]] = {}
+    for r in ins_rows:
         sn  = r.get("styleName", "")
-        hbn = r.get("healthBenefitName", "")
-        if sn and hbn:
-            hb_map.setdefault(sn, [])
-            if hbn not in hb_map[sn]:
-                hb_map[sn].append(hbn)
+        iname = r.get("instrumentName", "")
+        if sn and iname:
+            ins_map.setdefault(sn, [])
+            if iname not in ins_map[sn]:
+                ins_map[sn].append(iname)
 
     for row in rows:
         sn = row.get("styleName", "")
-        benefits = sorted(hb_map.get(sn, []))
-        row["healthBenefitName"] = ", ".join(benefits) if benefits else ""
+        instruments = sorted(ins_map.get(sn, []))
+        row["instrumentName"] = ", ".join(instruments) if instruments else ""
 
     # ── Fetch all music genres per dance style and aggregate into a list ──
     mg_query = """
@@ -210,6 +210,34 @@ def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[d
         sn = row.get("styleName", "")
         genres = sorted(mg_map.get(sn, []))
         row["musicGenreName"] = ", ".join(genres) if genres else ""
+
+    # ── Fetch all time periods per dance style and aggregate into a list ──
+    tp_query = """
+    PREFIX dance:   <http://example.org/dance/>
+    PREFIX schema1: <http://schema.org/>
+
+    SELECT ?styleName ?timePeriodName WHERE {
+      ?record a dance:DanceRecord ;
+              dance:hasDanceStyle ?style ;
+              dance:hasTimePeriod ?tp .
+      ?style schema1:name ?styleName .
+      ?tp schema1:name ?timePeriodName .
+    }
+    """
+    tp_rows = kg.select(tp_query)
+    tp_map: dict[str, list[str]] = {}
+    for r in tp_rows:
+        sn  = r.get("styleName", "")
+        tpn = r.get("timePeriodName", "")
+        if sn and tpn:
+            tp_map.setdefault(sn, [])
+            if tpn not in tp_map[sn]:
+                tp_map[sn].append(tpn)
+
+    for row in rows:
+        sn = row.get("styleName", "")
+        periods = sorted(tp_map.get(sn, []))
+        row["timePeriodName"] = ", ".join(periods) if periods else ""
 
     return rows
 
@@ -297,7 +325,7 @@ class DanceKGApp(tk.Tk):
                 w = 260
             elif col == "videoUrl":
                 w = 300
-            elif col in ("healthBenefitName", "musicGenreName"):
+            elif col in ("instrumentName", "musicGenreName", "timePeriodName"):
                 w = 320  # wider – holds a comma-separated list
             else:
                 w = 140

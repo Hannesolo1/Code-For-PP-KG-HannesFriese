@@ -9,7 +9,7 @@ class SimpleDanceKG:
     def __init__(self, ttl_path=None):
         if ttl_path is None:
             base_dir = Path(__file__).resolve().parents[1]
-            ttl_path = base_dir / "kg_code" / "dance_kg_merged_with_yt.ttl"
+            ttl_path = base_dir / "kg_code/graphs" / "final_kg.ttl"
 
         self.ttl_path = Path(ttl_path)
         if not self.ttl_path.exists():
