@@ -145,9 +145,9 @@ def run_query(kg: SimpleDanceKG, selected: dict[str, str], limit: int) -> list[d
               dance:hasDanceStyle ?style .
       ?style schema1:name ?styleName .
       OPTIONAL {{
-        ?style dance:hasYTLink ?video .
-        ?video schema1:title ?videoTitle .
-        BIND(REPLACE(STR(?video), "http://example.org/dance/video_", "https://www.youtube.com/watch?v=") AS ?videoUrl)
+        ?style dance:hasYTLink ?yt .
+        ?yt schema1:title ?videoTitle .
+        BIND(STR(?yt) AS ?videoUrl)
       }}
 {where_blocks}    }}
     ORDER BY ?styleName

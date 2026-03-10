@@ -1,0 +1,257 @@
+@prefix dance: <http://example.org/dance/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dance:age_Adults a dance:AgeGroup ;
+    schema1:name "Adults"@en .
+
+dance:age_All_ages a dance:AgeGroup ;
+    schema1:name "All ages"@en .
+
+dance:age_Kids a dance:AgeGroup ;
+    schema1:name "Kids"@en .
+
+dance:age_Seniors a dance:AgeGroup ;
+    schema1:name "Seniors"@en .
+
+dance:age_Teens a dance:AgeGroup ;
+    schema1:name "Teens"@en .
+
+dance:costume a owl:DatatypeProperty ;
+    rdfs:label "costume"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range xsd:string .
+
+dance:culturalSignificance a owl:DatatypeProperty ;
+    rdfs:label "cultural significance"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range xsd:string .
+
+dance:difficulty_Advanced a dance:LearningDifficulty ;
+    schema1:name "Advanced"@en .
+
+dance:difficulty_Beginner a dance:LearningDifficulty ;
+    schema1:name "Beginner"@en .
+
+dance:difficulty_Intermediate a dance:LearningDifficulty ;
+    schema1:name "Intermediate"@en .
+
+dance:formation_Circle a dance:DanceFormation ;
+    schema1:name "Circle"@en .
+
+dance:formation_Freestyle a dance:DanceFormation ;
+    schema1:name "Freestyle"@en .
+
+dance:formation_Group a dance:DanceFormation ;
+    schema1:name "Group"@en .
+
+dance:formation_Line a dance:DanceFormation ;
+    schema1:name "Line"@en .
+
+dance:formation_Mixed a dance:DanceFormation ;
+    schema1:name "Mixed"@en .
+
+dance:formation_Partner a dance:DanceFormation ;
+    schema1:name "Partner"@en .
+
+dance:formation_Processional a dance:DanceFormation ;
+    schema1:name "Processional"@en .
+
+dance:formation_Solo a dance:DanceFormation ;
+    schema1:name "Solo"@en .
+
+dance:formation_Square a dance:DanceFormation ;
+    schema1:name "Square"@en .
+
+dance:hardnessRatio a owl:DatatypeProperty ;
+    rdfs:label "hardness ratio"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range xsd:decimal .
+
+dance:hasAgeGroup a owl:ObjectProperty ;
+    rdfs:label "has age group"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:AgeGroup .
+
+dance:hasAssociatedMusicGenre a owl:ObjectProperty ;
+    rdfs:label "has associated music genre"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range schema1:MusicGenre .
+
+dance:hasDanceFormation a owl:ObjectProperty ;
+    rdfs:label "has dance formation"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:DanceFormation .
+
+dance:hasDanceStyle a owl:ObjectProperty ;
+    rdfs:label "has dance style"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:DanceStyle .
+
+dance:hasDanceType a owl:ObjectProperty ;
+    rdfs:label "has dance type"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:DanceType .
+
+dance:hasEventFestival a owl:ObjectProperty ;
+    rdfs:label "has event and festival"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range schema1:Event .
+
+dance:hasFamousPractitioner a owl:ObjectProperty ;
+    rdfs:label "has famous practitioner"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:Practitioner .
+
+dance:hasHealthBenefit a owl:ObjectProperty ;
+    rdfs:label "has health benefit"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:HealthBenefit .
+
+dance:hasInstrument a owl:ObjectProperty ;
+    rdfs:label "has instrument"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range schema1:MusicInstrument .
+
+dance:hasLearningDifficulty a owl:ObjectProperty ;
+    rdfs:label "has learning difficulty"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:LearningDifficulty .
+
+dance:hasOrigin a owl:ObjectProperty ;
+    rdfs:label "has origin"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:Origin .
+
+dance:hasTempoRange a owl:ObjectProperty ;
+    rdfs:label "has tempo range"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:TempoRange .
+
+dance:hasTimePeriod a owl:ObjectProperty ;
+    rdfs:label "has time period"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range dance:TimePeriod .
+
+dance:maxTempoBPM a owl:DatatypeProperty ;
+    rdfs:label "max tempo bpm"@en ;
+    rdfs:domain dance:TempoRange ;
+    rdfs:range xsd:integer .
+
+dance:minTempoBPM a owl:DatatypeProperty ;
+    rdfs:label "min tempo bpm"@en ;
+    rdfs:domain dance:TempoRange ;
+    rdfs:range xsd:integer .
+
+dance:modernAdaptations a owl:DatatypeProperty ;
+    rdfs:label "modern adaptations"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range xsd:string .
+
+dance:notableCharacteristics a owl:DatatypeProperty ;
+    rdfs:label "notable characteristics"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range xsd:string .
+
+schema1:UserLikes a owl:DatatypeProperty ;
+    rdfs:label "likes on video"@en ;
+    rdfs:domain <https://www.youtube.com/watch?v=YTLINK> ;
+    rdfs:range xsd:integer .
+
+schema1:description a owl:DatatypeProperty ;
+    rdfs:label "description"@en ;
+    rdfs:domain <https://www.youtube.com/watch?v=YTLINK> ;
+    rdfs:range xsd:string .
+
+schema1:duration a owl:DatatypeProperty ;
+    rdfs:label "duration"@en ;
+    rdfs:domain <https://www.youtube.com/watch?v=YTLINK> ;
+    rdfs:range xsd:duration .
+
+schema1:interactionCount a owl:DatatypeProperty ;
+    rdfs:label "view_count"@en ;
+    rdfs:domain <https://www.youtube.com/watch?v=YTLINK> ;
+    rdfs:range xsd:integer .
+
+schema1:title a owl:DatatypeProperty ;
+    rdfs:label "video title"@en ;
+    rdfs:domain <https://www.youtube.com/watch?v=YTLINK> ;
+    rdfs:range xsd:string .
+
+schema1:uploadDate a owl:DatatypeProperty ;
+    rdfs:label "upload date"@en ;
+    rdfs:domain <https://www.youtube.com/watch?v=YTLINK> ;
+    rdfs:range xsd:date .
+
+wd:Q28659447 a owl:DatatypeProperty ;
+    rdfs:label "comment Sentiment"@en ;
+    rdfs:domain <https://www.youtube.com/watch?v=YTLINK> ;
+    rdfs:range xsd:string .
+
+<https://www.youtube.com/watch?v=hasYTLink> a owl:ObjectProperty ;
+    rdfs:label "has yt link"@en ;
+    rdfs:domain dance:DanceRecord ;
+    rdfs:range <https://www.youtube.com/watch?v=YTLINK> .
+
+dance:DanceStyle a owl:Class ;
+    rdfs:label "Dance Style"@en ;
+    rdfs:subClassOf skos:Concept .
+
+dance:DanceType a owl:Class ;
+    rdfs:label "Dance Type"@en ;
+    rdfs:subClassOf skos:Concept .
+
+dance:HealthBenefit a owl:Class ;
+    rdfs:label "Health Benefit"@en ;
+    rdfs:subClassOf schema1:MedicalEntity .
+
+dance:Origin a owl:Class ;
+    rdfs:label "Origin"@en ;
+    rdfs:subClassOf schema1:Place .
+
+dance:Practitioner a owl:Class ;
+    rdfs:label "Practitioner"@en ;
+    rdfs:subClassOf schema1:Person .
+
+dance:TimePeriod a owl:Class ;
+    rdfs:label "Time Period"@en ;
+    rdfs:subClassOf schema1:Intangible .
+
+schema1:Event a owl:Class ;
+    rdfs:label "Event or Festival"@en .
+
+schema1:MusicGenre a owl:Class ;
+    rdfs:label "Music Genre"@en .
+
+schema1:MusicInstrument a owl:Class ;
+    rdfs:label "Instrument"@en .
+
+dance:TempoRange a owl:Class ;
+    rdfs:label "Tempo Range"@en ;
+    rdfs:subClassOf schema1:Intangible .
+
+dance:LearningDifficulty a owl:Class ;
+    rdfs:label "Learning Difficulty"@en ;
+    rdfs:subClassOf skos:Concept .
+
+dance:AgeGroup a owl:Class ;
+    rdfs:label "Age Group"@en ;
+    rdfs:subClassOf skos:Concept .
+
+<https://www.youtube.com/watch?v=YTLINK> a owl:Class ;
+    rdfs:label "has corresponding yt video"@en ;
+    rdfs:subClassOf schema1:VideoObject .
+
+dance:DanceFormation a owl:Class ;
+    rdfs:label "Dance Formation"@en ;
+    rdfs:subClassOf skos:Concept .
+
+dance:DanceRecord a owl:Class ;
+    rdfs:label "Dance Record"@en ;
+    rdfs:comment "Dance record"@en ;
+    rdfs:subClassOf schema1:CreativeWork .
+

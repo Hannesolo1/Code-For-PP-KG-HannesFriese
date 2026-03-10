@@ -1,0 +1,21 @@
+# API keys
+data/GPT4oKEY.txt
+data/LLM_key.txt
+yt_code/yt_key.txt
+
+# Drawings
+drawings/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+.DS_Store
+

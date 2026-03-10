@@ -1,0 +1,116 @@
+{
+  "name": "KG_on_dance_styles",
+  "dcat:acronym": [],
+  "date": "2026-03-10T11:19:21.762Z",
+  "formData": {
+    "dct:identifier": [
+      "09178975-e220-43e8-9ab4-8c34e0a5cfa0"
+    ],
+    "rdf:type": [
+      "dcat:Dataset",
+      "void:Dataset"
+    ],
+    "dct:title": "KG_on_dance_styles",
+    "dct:description": "This project for the course Building and Mining Knowledge Graphs focused on\nconstructing a semantically rich knowledge graph covering dance genres and\nstyles. The goal is to enable structured querying and exploration of\nrelationships between dances, origins, influences, and related metadata.",
+    "dct:created": "",
+    "dct:modified": [],
+    "dct:issued": "2026/03/10",
+    "dct:alternative": [],
+    "dcat:acronym": [],
+    "dcat:landingPage": [],
+    "rdfs:seeAlso": [],
+    "prov:qualifiedAttribution": [],
+    "dct:license": "",
+    "dcat:version": "1.0",
+    "dcat:distribution": [
+      {
+        "title": "Dance_Style_KG",
+        "description": "dance style KG download from GitHub",
+        "mediaType": "TTL",
+        "downloadURL": "https://github.com/Hannesolo1/KG_Personal_Project/tree/main",
+        "accessURL": "https://github.com/Hannesolo1/KG_Personal_Project/tree/main",
+        "accessService": "",
+        "byteSize": "",
+        "compressionFormat": "",
+        "packagingFormat": "",
+        "hasPolicy": "",
+        "license": "",
+        "rights": "",
+        "spatialResolution": "",
+        "temporalResolution": "",
+        "releaseDate": "",
+        "modificationDate": "",
+        "issued": ""
+      }
+    ],
+    "cito:citesAsAuthority": [
+      "https://github.com/Hannesolo1/KG_Personal_Project/blob/main/README.md"
+    ],
+    "void:description": [],
+    "dct:conformsTo": [],
+    "void:triple": [],
+    "void:vocabulary": [
+      "http://example.org/dance/",
+      "http://schema.org/",
+      "http://www.wikidata.org/entity/",
+      "http://www.w3.org/2001/XMLSchema#",
+      "http://www.w3.org/2004/02/skos/core#",
+      "http://www.w3.org/2002/07/owl#",
+      "https://www.youtube.com/watch?v="
+    ],
+    "dcat:servesDataset": [],
+    "void:sparqlEndpoint": [],
+    "mod:sampleQueries": [],
+    "dcat:keyword": [
+      "knowledge graph",
+      "dance genres",
+      "dance styles",
+      "youtube data",
+      "linked data"
+    ],
+    "dcat:theme": [],
+    "dct:references": [],
+    "dct:language": [
+      "en"
+    ],
+    "void:uriRegexPattern": [],
+    "void:linkset": [],
+    "void:exampleResource": [],
+    "dct:accessRights": "https://github.com/Hannesolo1/KG_Personal_Project/blob/main/README.md",
+    "prov:hadPrimarySource": [],
+    "void:uriSpace": [],
+    "timestamp": "2026-03-10T11:19:21.762Z",
+    "browserType": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15",
+    "submissionId": "kg-meta-1773141561762"
+  },
+  "validationErrors": {
+    "missingFields": [],
+    "invalidDates": [],
+    "errorMessage": "",
+    "submissionMode": "forced",
+    "submissionTimestamp": "2026-03-10T11:19:21.761Z"
+  },
+  "aiSuggestions": {},
+  "metadata": {
+    "submissionType": "regular",
+    "hasValidationErrors": false,
+    "submissionMode": "FORCED_SUBMISSION",
+    "timestamp": "2026-03-10T11:19:21.762Z",
+    "formOpenedAt": "2026-03-10T11:09:46.215Z",
+    "formSubmittedAt": "2026-03-10T11:19:21.761Z",
+    "autoSubmittedByTimer": false,
+    "timeSpentSeconds": 576,
+    "editSessions": [
+      {
+        "startTime": "2026-03-10T11:09:46.215Z",
+        "endTime": "2026-03-10T11:19:21.762Z",
+        "durationSeconds": 576
+      }
+    ],
+    "totalTimeSpentSeconds": 576,
+    "numberOfEditSessions": 1
+  },
+  "browserType": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15",
+  "timestamp": "2026-03-10T11:19:21.762Z",
+  "exportDate": "2026-03-10T11:19:38.494Z"
+}
