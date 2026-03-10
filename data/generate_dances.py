@@ -13,6 +13,7 @@ if not api_key:
 print(f"API Key loaded: {len(api_key)} characters")
 print(f"Using GPT-4o-mini model via OpenRouter")
 
+#load
 client = OpenAI(
     api_key=api_key,
     base_url="https://openrouter.ai/api/v1",
