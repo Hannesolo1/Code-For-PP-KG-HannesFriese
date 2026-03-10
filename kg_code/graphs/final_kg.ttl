@@ -5,6 +5,90 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+# =============================================================================
+# Dataset Description (VoID / DCAT)
+# =============================================================================
+
+<http://example.org/dance/dataset>
+    a dcat:Dataset, void:Dataset ;
+    dct:identifier "09178975-e220-43e8-9ab4-8c34e0a5cfa0" ;
+    dct:title "KG_on_dance_styles"@en ;
+    dct:alternative "Dance Styles Knowledge Graph"@en ;
+    dct:description "This project for the course Building and Mining Knowledge Graphs focused on constructing a semantically rich knowledge graph covering dance genres and styles. The goal is to enable structured querying and exploration of relationships between dances, origins, influences, and related metadata."@en ;
+    void:description "A Knowledge Graph of dance styles and genres, enriched with YouTube video metadata and comment sentiment. Entities are linked to Wikidata where possible. Built as part of the course 'Building and Mining Knowledge Graphs'."@en ;
+    dct:created "2026-03-10"^^xsd:date ;
+    dct:modified "2026-03-10"^^xsd:date ;
+    dct:issued "2026-03-10"^^xsd:date ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dct:rights "CC BY 4.0 – Attribution required"@en ;
+    dct:language <http://id.loc.gov/vocabulary/iso639-1/en> ;
+    dcat:version "1.0" ;
+    dcat:landingPage <https://github.com/Hannesolo1/KG_Personal_Project> ;
+    rdfs:seeAlso <https://github.com/Hannesolo1/KG_Personal_Project/blob/main/README.md> ;
+    rdfs:seeAlso <https://github.com/Hannesolo1/KG_Personal_Project/blob/main/kg_code/graphs/dance_ontology.ttl> ;
+    dct:accessRights <https://github.com/Hannesolo1/KG_Personal_Project/blob/main/README.md> ;
+    dct:conformsTo <https://www.w3.org/TR/rdf-schema/> ;
+    dct:conformsTo <https://www.w3.org/TR/owl2-overview/> ;
+    dct:conformsTo <https://www.w3.org/TR/void/> ;
+    dct:references <https://www.wikidata.org/> ;
+    dct:references <https://schema.org/> ;
+    dct:references <https://www.youtube.com/> ;
+    cito:citesAsAuthority <https://github.com/Hannesolo1/KG_Personal_Project/blob/main/README.md> ;
+    cito:citesAsAuthority <https://www.wikidata.org/> ;
+    cito:citesAsAuthority <https://schema.org/> ;
+    void:triple 8550 ;
+    void:uriSpace "http://example.org/dance/" ;
+    void:vocabulary <http://example.org/dance/> ;
+    void:vocabulary <http://schema.org/> ;
+    void:vocabulary <http://www.wikidata.org/entity/> ;
+    void:vocabulary <http://www.w3.org/2001/XMLSchema#> ;
+    void:vocabulary <http://www.w3.org/2004/02/skos/core#> ;
+    void:vocabulary <http://www.w3.org/2002/07/owl#> ;
+    void:vocabulary <http://www.w3.org/2000/01/rdf-schema#> ;
+    void:vocabulary <http://www.w3.org/ns/prov#> ;
+    void:exampleResource dance:Tango ;
+    void:exampleResource dance:Salsa ;
+    dcat:theme <http://eurovoc.europa.eu/3012> ;
+    dcat:theme <https://www.wikidata.org/wiki/Q11639> ;
+    dcat:keyword "knowledge graph"@en ;
+    dcat:keyword "dance genres"@en ;
+    dcat:keyword "dance styles"@en ;
+    dcat:keyword "youtube data"@en ;
+    dcat:keyword "linked data"@en ;
+    dcat:keyword "wikidata"@en ;
+    dcat:keyword "sentiment analysis"@en ;
+    dcat:keyword "ontology"@en ;
+    dcat:keyword "turtle"@en ;
+    dcat:keyword "RDF"@en ;
+    prov:qualifiedAttribution [
+        a prov:Attribution ;
+        prov:agent [ a foaf:Person ; foaf:name "Hannes Friese" ] ;
+        dcat:hadRole <http://www.w3.org/ns/dcat#creator>
+    ] ;
+    dcat:distribution [
+        a dcat:Distribution ;
+        dct:title "Dance_Style_KG"@en ;
+        dct:description "Dance style Knowledge Graph in Turtle (TTL) format, downloadable from GitHub. Contains ~8550 triples covering dance genres, styles, origins, YouTube video metadata, and sentiment data."@en ;
+        dcat:mediaType <https://www.iana.org/assignments/media-types/text/turtle> ;
+        dcat:downloadURL <https://github.com/Hannesolo1/KG_Personal_Project/raw/main/kg_code/graphs/final_kg.ttl> ;
+        dcat:accessURL <https://github.com/Hannesolo1/KG_Personal_Project/tree/main/kg_code/graphs> ;
+        dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+        dct:rights "CC BY 4.0 – Attribution required"@en ;
+        dcat:byteSize 8550 ;
+        dct:issued "2026-03-10"^^xsd:date ;
+        dct:modified "2026-03-10"^^xsd:date
+    ] .
+
+# =============================================================================
+# Knowledge Graph Triples
+# =============================================================================
 
 dance:age_Adults a dance:AgeGroup ;
     schema1:name "Adults"@en .

@@ -21,3 +21,39 @@
 9. Run `yt_code/add_yt_data.ipynb`
 10. Run `kg_code/create_KG/KG_yt_data_05_03.ipynb` (merge base KG + YouTube data)
 11. Run `ui/ui.py` to explore the final KG
+
+---
+
+## Metadata
+
+Dataset metadata (title, description, license, provenance, vocabularies, distribution info, and citation) is available in:
+- **[`metadata.json`](./metadata.json)** – full metadata in JSON format (DCAT / VoID / DCTerms)
+- **[`kg_code/graphs/final_kg.ttl`](./kg_code/graphs/final_kg.ttl)** – metadata also embedded directly in the KG as a VoID/DCAT dataset description block
+
+---
+
+## License
+
+This project is licensed under the **Creative Commons Attribution 4.0 International (CC BY 4.0)** license.  
+You are free to share and adapt the material for any purpose, provided appropriate credit is given.  
+See the full license at: https://creativecommons.org/licenses/by/4.0/
+
+---
+
+## Citation
+
+If you use this knowledge graph or any part of this project, please cite it as:
+
+```
+Friese, H. (2026). KG on Dance Styles – A Knowledge Graph of Dance Genres and Styles.
+GitHub. https://github.com/Hannesolo1/KG_Personal_Project
+```
+
+**Authority reference (cito:citesAsAuthority):**  
+https://github.com/Hannesolo1/KG_Personal_Project/blob/main/README.md
+
+Further references used in this project:
+- [Wikidata](https://www.wikidata.org/) – linked entity data
+- [Schema.org](https://schema.org/) – vocabulary for structured data
+- [YouTube Data API](https://developers.google.com/youtube/v3) – video metadata and comments
+

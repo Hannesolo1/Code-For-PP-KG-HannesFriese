@@ -12,43 +12,59 @@
     ],
     "dct:title": "KG_on_dance_styles",
     "dct:description": "This project for the course Building and Mining Knowledge Graphs focused on\nconstructing a semantically rich knowledge graph covering dance genres and\nstyles. The goal is to enable structured querying and exploration of\nrelationships between dances, origins, influences, and related metadata.",
-    "dct:created": "",
-    "dct:modified": [],
+    "dct:created": "2026-03-10",
+    "dct:modified": ["2026-03-10"],
     "dct:issued": "2026/03/10",
-    "dct:alternative": [],
-    "dcat:acronym": [],
-    "dcat:landingPage": [],
-    "rdfs:seeAlso": [],
-    "prov:qualifiedAttribution": [],
-    "dct:license": "",
+    "dct:alternative": ["Dance Styles Knowledge Graph"],
+    "dcat:acronym": ["DSKG"],
+    "dcat:landingPage": ["https://github.com/Hannesolo1/KG_Personal_Project"],
+    "rdfs:seeAlso": [
+      "https://github.com/Hannesolo1/KG_Personal_Project/blob/main/README.md",
+      "https://github.com/Hannesolo1/KG_Personal_Project/blob/main/kg_code/graphs/dance_ontology.ttl"
+    ],
+    "prov:qualifiedAttribution": [
+      {
+        "agent": "Hannes Friese",
+        "hadRole": "dcat:creator"
+      }
+    ],
+    "dct:license": "https://creativecommons.org/licenses/by/4.0/",
     "dcat:version": "1.0",
     "dcat:distribution": [
       {
         "title": "Dance_Style_KG",
-        "description": "dance style KG download from GitHub",
-        "mediaType": "TTL",
-        "downloadURL": "https://github.com/Hannesolo1/KG_Personal_Project/tree/main",
-        "accessURL": "https://github.com/Hannesolo1/KG_Personal_Project/tree/main",
+        "description": "Dance style Knowledge Graph in Turtle (TTL) format, downloadable from GitHub. Contains ~8550 triples covering dance genres, styles, origins, YouTube video metadata, and sentiment data.",
+        "mediaType": "text/turtle",
+        "downloadURL": "https://github.com/Hannesolo1/KG_Personal_Project/raw/main/kg_code/graphs/final_kg.ttl",
+        "accessURL": "https://github.com/Hannesolo1/KG_Personal_Project/tree/main/kg_code/graphs",
         "accessService": "",
-        "byteSize": "",
+        "byteSize": "8550",
         "compressionFormat": "",
         "packagingFormat": "",
         "hasPolicy": "",
-        "license": "",
-        "rights": "",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "rights": "CC BY 4.0 – Attribution required",
         "spatialResolution": "",
         "temporalResolution": "",
-        "releaseDate": "",
-        "modificationDate": "",
-        "issued": ""
+        "releaseDate": "2026-03-10",
+        "modificationDate": "2026-03-10",
+        "issued": "2026-03-10"
       }
     ],
     "cito:citesAsAuthority": [
-      "https://github.com/Hannesolo1/KG_Personal_Project/blob/main/README.md"
+      "https://github.com/Hannesolo1/KG_Personal_Project/blob/main/README.md",
+      "https://www.wikidata.org/",
+      "https://schema.org/"
     ],
-    "void:description": [],
-    "dct:conformsTo": [],
-    "void:triple": [],
+    "void:description": [
+      "A Knowledge Graph of dance styles and genres, enriched with YouTube video metadata and comment sentiment. Entities are linked to Wikidata where possible. Built as part of the course 'Building and Mining Knowledge Graphs'."
+    ],
+    "dct:conformsTo": [
+      "https://www.w3.org/TR/rdf-schema/",
+      "https://www.w3.org/TR/owl2-overview/",
+      "https://www.w3.org/TR/void/"
+    ],
+    "void:triple": ["8550"],
     "void:vocabulary": [
       "http://example.org/dance/",
       "http://schema.org/",
@@ -56,20 +72,38 @@
       "http://www.w3.org/2001/XMLSchema#",
       "http://www.w3.org/2004/02/skos/core#",
       "http://www.w3.org/2002/07/owl#",
+      "http://www.w3.org/2000/01/rdf-schema#",
+      "http://www.w3.org/ns/prov#",
       "https://www.youtube.com/watch?v="
     ],
     "dcat:servesDataset": [],
     "void:sparqlEndpoint": [],
-    "mod:sampleQueries": [],
+    "mod:sampleQueries": [
+      "SELECT ?dance ?origin WHERE { ?dance a dance:DanceRecord ; dance:hasOrigin ?origin . }",
+      "SELECT ?dance ?genre WHERE { ?dance dance:hasAssociatedMusicGenre ?genre . }",
+      "SELECT ?dance ?sentiment WHERE { ?dance dance:hasYTLink ?video . ?video wd:Q28659447 ?sentiment . }"
+    ],
     "dcat:keyword": [
       "knowledge graph",
       "dance genres",
       "dance styles",
       "youtube data",
-      "linked data"
+      "linked data",
+      "wikidata",
+      "sentiment analysis",
+      "ontology",
+      "turtle",
+      "RDF"
     ],
-    "dcat:theme": [],
-    "dct:references": [],
+    "dcat:theme": [
+      "http://eurovoc.europa.eu/3012",
+      "https://www.wikidata.org/wiki/Q11639"
+    ],
+    "dct:references": [
+      "https://www.wikidata.org/",
+      "https://schema.org/",
+      "https://www.youtube.com/"
+    ],
     "dct:language": [
       "en"
     ],
