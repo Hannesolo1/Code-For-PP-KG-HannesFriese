@@ -1,5 +1,8 @@
-# KG Personal Project
-
+# KG Personal Project - Dance Styles Knowledge Graph
+This project for the course Building and Mining Knowledge Graphs focuses on
+constructing a semantically rich knowledge graph covering dance genres and
+styles. The goal is to enable structured querying and exploration of
+relationships between dances, origins, influences, and related metadata.
 ## Quick run order
 
 0. **Setup once**
