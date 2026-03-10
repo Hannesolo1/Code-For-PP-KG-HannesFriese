@@ -3,6 +3,12 @@ data/GPT4oKEY.txt
 data/LLM_key.txt
 yt_code/yt_key.txt
 
+# AI data
+data/ai_data/
+
+# YT data
+data/yt_data/
+
 # Drawings
 drawings/
 
