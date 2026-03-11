@@ -137,6 +137,28 @@ Dataset metadata (title, description, license, provenance, vocabularies, distrib
 
 ---
 
+## Data & Redistribution
+
+### Synthetic Data
+The dance style records in this knowledge graph — including cultural descriptions, costume notes, health benefits, famous practitioners, associated instruments, and music genres — were generated synthetically using **GPT-4.1 mini** (OpenAI). This data does not represent verified factual claims and should not be relied upon for academic or professional research without independent verification.
+
+### YouTube Data
+This project retrieves video metadata and public video descriptions via the **YouTube Data API v3**.  
+YouTube is a trademark of **Google LLC**. Use of YouTube data is subject to the [YouTube Terms of Service](https://www.youtube.com/t/terms) and [Google's Privacy Policy](https://policies.google.com/privacy).
+
+This project does **not** redistribute or store YouTube video content. Only metadata (titles, view counts, upload dates, durations) and public video descriptions are stored in the knowledge graph for research and educational purposes.
+
+### Redistribution
+The knowledge graph is released under [**CC BY 4.0**](https://creativecommons.org/licenses/by/4.0/). You are free to share and adapt the data, provided that:
+- **Attribution** is given to the original author (Hannes Friese)
+- **AI-generated content** is acknowledged (generated via GPT-4.1 mini)
+- **YouTube-derived data** is used in compliance with YouTube's Terms of Service
+- The **CC BY 4.0** license is referenced
+
+> ⚠️ The synthetic nature of the dance style descriptions means any redistribution of that data should be accompanied by a clear disclaimer that the content is AI-generated and unverified.
+
+---
+
 ## License
 
 This project is licensed under the **Creative Commons Attribution 4.0 International (CC BY 4.0)** license.  
