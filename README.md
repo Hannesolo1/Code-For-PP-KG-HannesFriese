@@ -142,6 +142,11 @@ Dataset metadata (title, description, license, provenance, vocabularies, distrib
 ### Synthetic Data
 The dance style records in this knowledge graph — including cultural descriptions, costume notes, health benefits, famous practitioners, associated instruments, and music genres — were generated synthetically using **GPT-4.1 mini** (OpenAI). This data does not represent verified factual claims and should not be relied upon for academic or professional research without independent verification.
 
+The selection of dance styles, types, and attributes was **inspired by** the following publicly available dataset:
+> Monfared, M. (n.d.). *Dances Dataset*. Kaggle. https://www.kaggle.com/datasets/melissamonfared/dances
+
+Note that no actual data from this dataset was used or redistributed. It served solely as a reference for deciding which dance styles and attributes to include.
+
 ### YouTube Data
 This project retrieves video metadata and public video descriptions via the **YouTube Data API v3**.  
 YouTube is a trademark of **Google LLC**. Use of YouTube data is subject to the [YouTube Terms of Service](https://www.youtube.com/t/terms) and [Google's Privacy Policy](https://policies.google.com/privacy).
