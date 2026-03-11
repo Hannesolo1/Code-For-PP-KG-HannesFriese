@@ -12,6 +12,8 @@ data/yt_data/
 # Drawings
 drawings/
 
+#testing for report
+kg_code/test_kg/test_sparql_queries_04_03.ipynb
 # Python
 __pycache__/
 *.pyc
